@@ -10,8 +10,6 @@ function Login() {
   const navigate = useNavigate();
   const { login } = useAuth();
 
-  // This function MUST be inside Login
-  // because the form uses it through onSubmit.
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -22,7 +20,10 @@ function Login() {
       return;
     }
 
-    const result = login(accountNumber, pin);
+    const result = login(
+      accountNumber.trim(),
+      pin.trim()
+    );
 
     if (!result.success) {
       setError(result.message);
@@ -35,9 +36,11 @@ function Login() {
   return (
     <main className="login-page">
       <section className="login-card">
+        <div className="login-logo">🏧</div>
+
         <div className="login-header">
           <h1>Python Bank</h1>
-          <p>ATM Simulation</p>
+          <p>Secure ATM Banking</p>
         </div>
 
         <form onSubmit={handleSubmit}>
@@ -49,6 +52,7 @@ function Login() {
             <input
               id="accountNumber"
               type="text"
+              inputMode="numeric"
               value={accountNumber}
               onChange={(event) =>
                 setAccountNumber(event.target.value)
@@ -63,28 +67,27 @@ function Login() {
             <input
               id="pin"
               type="password"
+              inputMode="numeric"
+              maxLength="4"
               value={pin}
               onChange={(event) =>
                 setPin(event.target.value)
               }
-              placeholder="Enter PIN"
-              maxLength="4"
+              placeholder="Enter 4-digit PIN"
             />
           </div>
 
           {error && (
-            <p className="error-message">
-              {error}
-            </p>
+            <p className="error-message">{error}</p>
           )}
 
-          <button type="submit">
-            Login
+          <button className="primary-button" type="submit">
+            Login Securely
           </button>
         </form>
 
         <div className="demo-credentials">
-          <p>Demo Account</p>
+          <strong>Demo Account</strong>
           <span>Account: 10010001</span>
           <span>PIN: 1234</span>
         </div>

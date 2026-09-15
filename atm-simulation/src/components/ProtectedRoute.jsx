@@ -1,22 +1,14 @@
-import { Navigate, Outlet} from "react-router-dom"
-import { useAuth } from "../context/AuthContext"
-// ProtectedRoute prevents unauthenticated users
-// from accessing protected pages.
+import { Navigate, Outlet } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 function ProtectedRoute() {
-    const {isAuthenticated} = useAuth();
+  const { isAuthenticated } = useAuth();
 
-     // If the user isn't logged in, redirect them to login.
-     if (!isAuthenticated) {
-        return <Navigate to="/login" replace/>
-     }
-    //  If authenticated, render the requested child route
-    return <Outlet/>
-  return (
-    <div>
-      
-    </div>
-  )
+  if (!isAuthenticated) {
+    return <Navigate to="/login" replace />;
+  }
+
+  return <Outlet />;
 }
 
-export default ProtectedRoute
+export default ProtectedRoute;

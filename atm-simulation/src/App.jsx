@@ -1,47 +1,69 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import {
+  BrowserRouter,
+  Navigate,
+  Route,
+  Routes,
+} from "react-router-dom";
 
 import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 
-import Login from "./pages/Login";
-
-// Temporary dashboard.
-// We'll replace this with the real Dashboard page
-// when we build the dashboard feature.
-function Dashboard() {
-  return (
-    <div>
-      <h1>Dashboard</h1>
-      <p>You are successfully logged in.</p>
-    </div>
-  );
-}
+import Login from "./pages/login";
+import Dashboard from "./pages/Dashboard";
+import Deposit from "./pages/Deposit";
+import Withdraw from "./pages/Withdraw";
+import Transfer from "./pages/Transfer";
+import Transactions from "./pages/Transactions";
+import ChangePin from "./pages/ChangePin";
 
 function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
         <Routes>
-
-          {/* Public route */}
           <Route path="/login" element={<Login />} />
 
-          {/* Protected routes */}
           <Route element={<ProtectedRoute />}>
-
             <Route
               path="/dashboard"
               element={<Dashboard />}
             />
 
+            <Route
+              path="/deposit"
+              element={<Deposit />}
+            />
+
+            <Route
+              path="/withdraw"
+              element={<Withdraw />}
+            />
+
+            <Route
+              path="/transfer"
+              element={<Transfer />}
+            />
+
+            <Route
+              path="/transactions"
+              element={<Transactions />}
+            />
+
+            <Route
+              path="/change-pin"
+              element={<ChangePin />}
+            />
           </Route>
 
-          {/* Redirect unknown routes to login */}
           <Route
-            path="*"
-            element={<Navigate to="/login" replace />}
+            path="/"
+            element={<Navigate to="/dashboard" replace />}
           />
 
+          <Route
+            path="*"
+            element={<Navigate to="/dashboard" replace />}
+          />
         </Routes>
       </AuthProvider>
     </BrowserRouter>

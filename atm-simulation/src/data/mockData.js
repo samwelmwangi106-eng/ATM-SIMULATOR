@@ -1,7 +1,4 @@
-// Temporary mock data for the React frontend.
-// This will eventually be replaced by data returned from our Flask API.
-
-export const users = [
+export const initialUsers = [
   {
     id: 1,
     accountNumber: "10010001",
@@ -15,5 +12,24 @@ export const users = [
     name: "Valentine",
     pin: "5678",
     balance: 75000,
+  },
+];
+
+export const initialTransactions = [
+  {
+    id: 1,
+    accountNumber: "10010001",
+    type: "Deposit",
+    amount: 50000,
+    description: "Initial account balance",
+    date: new Date().toISOString(),
+  },
+  {
+    id: 2,
+    accountNumber: "10010002",
+    type: "Deposit",
+    amount: 75000,
+    description: "Initial account balance",
+    date: new Date().toISOString(),
   },
 ];
